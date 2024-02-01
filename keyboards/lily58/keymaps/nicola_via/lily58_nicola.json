@@ -5,8 +5,8 @@
   "lighting": "none",
   "matrix": {"rows": 10, "cols": 6},
   "customKeycodes": [
-    {"name":"NCL_ON", "title": "Turn on NICOLA", "shortName":"NCL_ON"},
-    {"name":"NCL_OFF", "title": "Turn off NICOLA", "shortName":"NCL_OFF"}
+    {"name":"NCL_OFF", "title": "Turn off NICOLA", "shortName":"NCL_OFF"},
+    {"name":"NCL_ON", "title": "Turn on NICOLA", "shortName":"NCL_ON"}
   ],
   "layouts": {
     "labels": [],
