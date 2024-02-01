@@ -29,12 +29,12 @@ enum layer_number {
     _TRACKBALL = 3,
     _Layer4 = 4,
     _Layer5 = 5,
-    _Layer6 = 6
+    _NICOLA = 6
 };
 
 
 #define LW_MHEN LT(1,KC_MHEN)  // lower
-#define RS_HENK LT(2,KC_HENK)  // raise
+#define RS_HENK LT(2,QK_KB_8)  // raise
 #define DEL_ALT ALT_T(KC_DEL)
 
 /*
@@ -120,16 +120,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
                                                             //`--------------'  `--------------'
     ),
-  [_Layer6] = LAYOUT(
+  [_NICOLA] = LAYOUT(
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      _______,    NG_Q,    NG_W,    NG_E,    NG_R,    NG_T,                                          NG_Y,    NG_U,    NG_I,    NG_O,    NG_P, NG_LBRC,
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      _______,    NG_A,    NG_S,    NG_D,    NG_F,    NG_G,                                          NG_H,    NG_J,    NG_K,    NG_L, NG_SCLN, NG_QUOT,
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      _______,    NG_Z,    NG_X,    NG_C,    NG_V,    NG_B,                                          NG_N,    NG_M, NG_COMM,  NG_DOT, NG_SLSH, _______,
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
-                        XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,             XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
-                                                                 XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+                        _______, _______, QK_KB_7,  NG_SHFTL,   _______,             _______,  _______, _______, _______,  _______,
+                                                                 _______, _______,  _______, _______, _______, _______
                                                             //`--------------'  `--------------'
     )
 };
@@ -160,6 +160,11 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return true;
 }
 
+void matrix_init_user(void) {
+  // NICOLA親指シフト
+  set_nicola(_NICOLA);
+  // NICOLA親指シフト
+}
 
 void matrix_scan_user(void) {
 
@@ -201,7 +206,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         rgblight_sethsv_range(HSV_CYAN, 0, 2);
         cocot_set_scroll_mode(false);
         break;
-    case _Layer6:
+    case _NICOLA:
         rgblight_sethsv_range(HSV_ORANGE, 0, 2);
         cocot_set_scroll_mode(false);
         break;
@@ -214,6 +219,37 @@ layer_state_t layer_state_set_user(layer_state_t state) {
       return state;
 };
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case QK_KB_7:
+      if (record->event.pressed) {
+        // NICOLA親指シフト
+        nicola_off();
+        // NICOLA親指シフト
+      }
+      return false;
+      break;
+    case QK_KB_8:
+      if (record->event.pressed) {
+        // NICOLA親指シフト
+        nicola_on();
+        // NICOLA親指シフト
+      }
+      return false;
+      break;
+  }
+
+  // NICOLA親指シフト
+  bool a = true;
+  if (nicola_state()) {
+    nicola_mode(keycode, record);
+    a = process_nicola(keycode, record);
+  }
+  if (a == false) return false;
+  // NICOLA親指シフト
+
+  return true;
+}
 
 #ifdef OLED_ENABLE
 bool oled_task_user(void) {
