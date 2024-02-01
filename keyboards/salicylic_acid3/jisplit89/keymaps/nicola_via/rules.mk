@@ -1,5 +1,6 @@
 VIA_ENABLE = yes
-RGBLIGHT_ENABLE = no       # Enable keyboard RGB underglow
+RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
+LTO_ENABLE = yes
 MOUSEKEY_ENABLE = yes
 EXTRAKEY_ENABLE = yes       # Audio control and System control
 SRC += nicola.c \
