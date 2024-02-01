@@ -2,11 +2,9 @@
   "name": "jisplit89",
   "vendorId": "0x04D8",
   "productId": "0xEB4F",
-  "lighting": "qmk_rgblight",
   "matrix": {"rows": 14, "cols": 8},
   "customKeycodes": [
-    {"name":"NCL_ON", "title": "Turn on NICOLA", "shortName":"NCL_ON"},
-    {"name":"NCL_OFF", "title": "Turn off NICOLA", "shortName":"NCL_OFF"}
+     {"name":"NCL_OFF", "title": "Turn off NICOLA", "shortName":"NCL_OFF"},   {"name":"NCL_ON", "title": "Turn on NICOLA", "shortName":"NCL_ON"}
   ],
   "layouts": {
     "keymap": [
