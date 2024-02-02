@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include "keymap_japanese.h"
+#include "sendstring_japanese.h"
 
 // NICOLA親指シフト
 #include "nicola.h"
