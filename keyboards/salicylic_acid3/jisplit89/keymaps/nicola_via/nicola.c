@@ -168,7 +168,7 @@ void nicola_m_type(void) {
 
 void nicola_o_type(void) {
     if(nicola_o_key != 0) {
-        send_string(" ");
+        tap_code(KC_INT4);
     }
 }
 
