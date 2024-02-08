@@ -95,6 +95,7 @@ void matrix_init_user(void) {
 }
 
 static bool fn_pressed = false;
+static uint16_t fn_pressed_time = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -102,10 +103,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // NICOLA親指シフト
       if (record->event.pressed) {
         fn_pressed = true;
+        fn_pressed_time = record->event.time;
+
         layer_on(_FN);
       } else {
         layer_off(_FN);
-        if(fn_pressed){
+
+        if(fn_pressed
+        && (TIMER_DIFF_16(record->event.time, fn_pressed_time) < TAPPING_TERM)){
             nicola_off();
         }
         fn_pressed = false;
