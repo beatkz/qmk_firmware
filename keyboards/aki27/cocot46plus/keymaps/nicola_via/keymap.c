@@ -24,18 +24,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Defines names for use in layer keycodes and the keymap
 enum layer_number {
     _BASE = 0,
-    _LOWER = 1,
-    _RAISE = 2,
-    _TRACKBALL = 3,
-    _Layer4 = 4,
-    _Layer5 = 5,
-    _NICOLA = 6
+    _NICOLA = 1,
+    _FN1 = 2,
+    _FN2 = 3,
+    _TRACKBALL = 4,
+    _FN4 = 5,
+    _FN5 = 6,
 };
-
-
-#define LW_MHEN LT(1,KC_MHEN)  // lower
-#define RS_HENK LT(2,QK_KB_8)  // raise
-#define DEL_ALT ALT_T(KC_DEL)
 
 /*
 #define CPI_SW USER00
@@ -60,7 +55,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                  KC_PGUP, KC_MS_BTN3,  KC_PGDOWN, XXXXXXX, XXXXXXX, XXXXXXX
                                                             //`--------------'  `--------------'
     ),
-  [_LOWER] = LAYOUT(
+   [_NICOLA] = LAYOUT(
+  //|-------------------------------------------------------|                                   |-------------------------------------------------------|
+      _______,    NG_Q,    NG_W,    NG_E,    NG_R,    NG_T,                                          NG_Y,    NG_U,    NG_I,    NG_O,    NG_P, NG_LBRC,
+  //|-------------------------------------------------------|                                   |-------------------------------------------------------|
+      _______,    NG_A,    NG_S,    NG_D,    NG_F,    NG_G,                                          NG_H,    NG_J,    NG_K,    NG_L, NG_SCLN, NG_QUOT,
+  //|-------------------------------------------------------|                                   |-------------------------------------------------------|
+      _______,    NG_Z,    NG_X,    NG_C,    NG_V,    NG_B,                                          NG_N,    NG_M, NG_COMM,  NG_DOT, NG_SLSH, _______,
+  //|-------------------------------------------------------|                                   |-------------------------------------------------------|
+                        _______, _______, QK_KB_7,  NG_SHFTL,   _______,             _______,  NG_SHFTR, _______, _______,  _______,
+                                                                 _______, _______,  _______, _______, _______, _______
+                                                            //`--------------'  `--------------'
+    ),
+  [_FN1] = LAYOUT(
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
        KC_ESC, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                                       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
@@ -72,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                  KC_PGUP, KC_MS_BTN3,  KC_PGDOWN, XXXXXXX, XXXXXXX, XXXXXXX
                                                             //`--------------'  `--------------'
     ),
-  [_RAISE] = LAYOUT(
+  [_FN2] = LAYOUT(
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
        KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                          KC_6,    KC_7,    KC_8,    KC_9,   KC_0,  KC_BSPC,
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
@@ -96,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                  KC_PGUP, KC_MS_BTN3,  KC_PGDOWN, XXXXXXX, XXXXXXX, XXXXXXX
                                                             //`--------------'  `--------------'
     ),
-  [_Layer4] = LAYOUT(
+  [_FN4] = LAYOUT(
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
@@ -108,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
                                                             //`--------------'  `--------------'
     ),
-  [_Layer5] = LAYOUT(
+  [_FN5] = LAYOUT(
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|-------------------------------------------------------|                                   |-------------------------------------------------------|
@@ -120,18 +127,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
                                                             //`--------------'  `--------------'
     ),
-  [_NICOLA] = LAYOUT(
-  //|-------------------------------------------------------|                                   |-------------------------------------------------------|
-      _______,    NG_Q,    NG_W,    NG_E,    NG_R,    NG_T,                                          NG_Y,    NG_U,    NG_I,    NG_O,    NG_P, NG_LBRC,
-  //|-------------------------------------------------------|                                   |-------------------------------------------------------|
-      _______,    NG_A,    NG_S,    NG_D,    NG_F,    NG_G,                                          NG_H,    NG_J,    NG_K,    NG_L, NG_SCLN, NG_QUOT,
-  //|-------------------------------------------------------|                                   |-------------------------------------------------------|
-      _______,    NG_Z,    NG_X,    NG_C,    NG_V,    NG_B,                                          NG_N,    NG_M, NG_COMM,  NG_DOT, NG_SLSH, _______,
-  //|-------------------------------------------------------|                                   |-------------------------------------------------------|
-                        _______, _______, QK_KB_7,  NG_SHFTL,   _______,             _______,  _______, _______, _______,  _______,
-                                                                 _______, _______,  _______, _______, _______, _______
-                                                            //`--------------'  `--------------'
-    )
 };
 
 keyevent_t encoder1_ccw = {
@@ -186,11 +181,11 @@ void matrix_scan_user(void) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
-    case _LOWER:
+    case _FN1:
         rgblight_sethsv_range(HSV_BLUE, 0, 2);
         cocot_set_scroll_mode(true);
         break;
-    case _RAISE:
+    case _FN2:
         rgblight_sethsv_range(HSV_RED, 0, 2);
         cocot_set_scroll_mode(true);
         break;
@@ -198,11 +193,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         rgblight_sethsv_range(HSV_GREEN, 0, 2);
         cocot_set_scroll_mode(false);
         break;
-    case _Layer4:
+    case _FN4:
         rgblight_sethsv_range(HSV_YELLOW, 0, 2);
         cocot_set_scroll_mode(false);
         break;
-    case _Layer5:
+    case _FN5:
         rgblight_sethsv_range(HSV_CYAN, 0, 2);
         cocot_set_scroll_mode(false);
         break;
