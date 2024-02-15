@@ -23,14 +23,31 @@ enum layer_number {
 #define NCL_OFF QK_KB_0
 #define NCL_ON  QK_KB_1
 
+enum custom_keycodes {
+    QWERTY = SAFE_RANGE,
+    // NICOLA-A for JP KB Env
+    KC2_ATM, // 2 @
+    KC6_CAR, // 6 ^
+    KC7_AMP, // 7 &
+    KC8_AST, // 8 *
+    KC9_LPR, // 9 (
+    KC0_RPR, // 0 )
+    MIN_UDS, // - _
+    EQL_PLS, // = +
+    SCL_COL, // ; :
+    QUO_DQU, // ' "
+    LSB_LCB  // [ {
+    // NICOLA-A
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT(
   //,-----------------------------------------------------|   |--------------------------------------------------------------------------------.
-       KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,        KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,  KC_EQL, KC_BSLS,  KC_GRV,
+       KC_ESC,    KC_1, KC2_ATM,    KC_3,    KC_4,    KC_5,     KC6_CAR, KC7_AMP, KC8_AST, KC9_LPR, KC0_RPR, MIN_UDS, EQL_PLS, KC_BSLS,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
-       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_LBRC, KC_RBRC,KC_BSPC,
+       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, LSB_LCB, KC_RBRC,KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------|
-     KC_LCTL,     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,        KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,  KC_ENT,
+      KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,        KC_H,    KC_J,    KC_K,    KC_L, SCL_COL, QUO_DQU,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, MO(_FN1),
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------|
@@ -141,6 +158,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    // NICOLA-A for JP KB Env
+    // NICOLA-A for JP KB Env
     default:
         if(record->event.pressed){
             fn_pressed = false;
