@@ -17,13 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-/* USB Device descriptor parameter */
-#define VENDOR_ID    0x1727
-#define PRODUCT_ID   0x0003
-#define DEVICE_VER   0x0001
-#define MANUFACTURER aki27
-#define PRODUCT      cocot46plus
-
 /* VIA */
 #define DYNAMIC_KEYMAP_LAYER_COUNT 7
 
@@ -55,7 +48,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 200
 
 /* ws2812 RGB LED */
-#define RGB_DI_PIN B6
+#define WS2812_DI_PIN B6
 
 #ifdef RGBLIGHT_ENABLE
     #undef RGBLED_NUM

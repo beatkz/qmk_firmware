@@ -167,7 +167,9 @@ void nicola_m_type(void) {
 }
 
 void nicola_o_type(void) {
-    if(nicola_o_key != 0) {
+    if(nicola_o_key == NG_SHFTL) {
+        send_string(" ");
+    } else if(nicola_o_key == NG_SHFTR){
         tap_code(KC_INT4);
     }
 }

@@ -1,4 +1,6 @@
 VIA_ENABLE = yes
-RGBLIGHT_ENABLE = no
+# Nicola
+LTO_ENABLE = yes
 SRC += nicola.c \
        key_duration.c
+# Nicola
