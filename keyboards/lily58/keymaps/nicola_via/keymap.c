@@ -18,6 +18,7 @@
 #include <stdio.h>
 // NICOLA親指シフト
 #include "nicola.h"
+#include "sendstring_japanese.h"
 NGKEYS nicola_keys;
 // NICOLA親指シフト
 
@@ -105,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,    NG_1,    NG_2,    NG_3,    NG_4,    NG_5,                   _______, _______, _______, _______, _______, _______,
   _______,    NG_Q,    NG_W,    NG_E,    NG_R,    NG_T,                      NG_Y,    NG_U,    NG_I,    NG_O,    NG_P, NG_LBRC,
   _______,    NG_A,    NG_S,    NG_D,    NG_F,    NG_G,                      NG_H,    NG_J,    NG_K,    NG_L, NG_SCLN, _______,
-  _______,    NG_Z,    NG_X,    NG_C,    NG_V,    NG_B, XXXXXXX, XXXXXXX,    NG_N,    NG_M, NG_COMM,  NG_DOT, NG_SLSH, _______,
+  _______,    NG_Z,    NG_X,    NG_C,    NG_V,    NG_B,  _______, _______,    NG_N,    NG_M, NG_COMM,  NG_DOT, NG_SLSH, _______,
                              _______, _______, NCL_OFF, NG_SHFTL, NG_SHFTR,  _______, _______, _______
   ),
 /* FN1
@@ -126,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_FN1] = LAYOUT(
   _______, _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______,
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                       KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-  _______, _______, _______, _______, _______, _______,                     XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
+  _______, _______, _______, _______, _______, _______,                     _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
   _______, _______, _______, _______, _______, _______,   _______, _______, KC_PLUS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, _______,
                              _______, _______, _______,  _______, _______,  _______, _______, _______
 ),
