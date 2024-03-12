@@ -23,31 +23,14 @@ enum layer_number {
 #define NCL_OFF QK_KB_0
 #define NCL_ON  QK_KB_1
 
-enum custom_keycodes {
-    QWERTY = SAFE_RANGE,
-    // NICOLA-A for JP KB Env
-    KC2_ATM, // 2 @
-    KC6_CAR, // 6 ^
-    KC7_AMP, // 7 &
-    KC8_AST, // 8 *
-    KC9_LPR, // 9 (
-    KC0_RPR, // 0 )
-    MIN_UDS, // - _
-    EQL_PLS, // = +
-    SCL_COL, // ; :
-    QUO_DQU, // ' "
-    LSB_LCB  // [ {
-    // NICOLA-A
-};
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT(
   //,-----------------------------------------------------|   |--------------------------------------------------------------------------------.
-       KC_ESC,    KC_1, KC2_ATM,    KC_3,    KC_4,    KC_5,     KC6_CAR, KC7_AMP, KC8_AST, KC9_LPR, KC0_RPR, MIN_UDS, EQL_PLS, KC_BSLS,  KC_GRV,
+       KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,        KC_6,    KC_7,    KC_8,    KC_9,    KC_0, JP_MINS, KC_EQL, KC_BSLS,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
-       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, LSB_LCB, KC_RBRC,KC_BSPC,
+       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, JP_LBRC, JP_RBRC, KC_DEL,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,        KC_H,    KC_J,    KC_K,    KC_L, SCL_COL, QUO_DQU,  KC_ENT,
+      KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,        KC_H,    KC_J,    KC_K,    KC_L, JP_SCLN, JP_COLN,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, MO(_FN1),
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------|
@@ -58,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------|   |--------------------------------------------------------------------------------.
       _______,    NG_1,   NG_2,    NG_3,    NG_4,    NG_5,        KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,  KC_EQL, KC_BSLS,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
-      _______,    NG_Q,   NG_W,    NG_E,    NG_R,    NG_T,        NG_Y,    NG_U,    NG_I,    NG_O,    NG_P, NG_LBRC, NG_RBRC,_______,
+      _______,    NG_Q,   NG_W,    NG_E,    NG_R,    NG_T,        NG_Y,    NG_U,    NG_I,    NG_O,    NG_P, NG_LBRC, NG_RBRC, _______,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------|
       _______,    NG_A,   NG_S,    NG_D,    NG_F,    NG_G,        NG_H,    NG_J,    NG_K,    NG_L, NG_SCLN, NG_QUOT, _______,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------|
@@ -83,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FN2] = LAYOUT( /* Base */
   //,-----------------------------------------------------|   |--------------------------------------------------------------------------------.
- TG(_FN2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   QK_BOOT,
+     TG(_FN2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   QK_BOOT,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------+--------+--------|
