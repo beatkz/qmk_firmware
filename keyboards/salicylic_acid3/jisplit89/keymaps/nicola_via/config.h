@@ -19,4 +19,4 @@
 /* Select hand configuration */
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 3
-#define TAPPING_TERM 200
+#define TAPPING_TERM 180
