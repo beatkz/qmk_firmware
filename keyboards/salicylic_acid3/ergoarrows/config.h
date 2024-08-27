@@ -17,7 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#define SPLIT_HAND_PIN B6
 #define TAPPING_TERM 180
 
 #ifndef IOS_DEVICE_ENABLE
