@@ -236,6 +236,7 @@ bool oled_task_user(void) {
 #endif // OLED_ENABLE
 
 static bool fn1_pressed = false;
+static uint16_t fn_pressed_time = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if(record->event.pressed){
@@ -248,12 +249,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // NICOLA親指シフト
       if (record->event.pressed) {
         fn1_pressed = true;
+        fn_pressed_time = record->event.time;
+
         layer_on(_FN1);
       } else {
         layer_off(_FN1);
-        if(fn1_pressed){
+        if(fn1_pressed
+        && (TIMER_DIFF_16(record->event.time, fn_pressed_time) < TAPPING_TERM)){
             nicola_off();
         }
+        fn1_pressed = false;
       }
       // NICOLA親指シフト
       return false;

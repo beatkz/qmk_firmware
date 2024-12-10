@@ -1,4 +1,5 @@
-/* Copyright 2020 Salicylic_acid3
+/*
+ * (C) 2020 Sadao Ikebe @bonyarou
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,10 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #pragma once
 
-/* Select hand configuration */
+typedef void (*keypress_timer_expired_func_t)(void);
+void keypress_timer_init(keypress_timer_expired_func_t);
+void keypress_timer_start(uint16_t);
 
-#define DYNAMIC_KEYMAP_LAYER_COUNT 3
-#define TAPPING_TERM 180
