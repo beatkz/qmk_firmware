@@ -132,31 +132,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
-keyevent_t encoder1_ccw = {
-    .key = (keypos_t){.row = 4, .col = 2},
-    .pressed = false
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+    [0] = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [1] = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [2] = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [3] = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [4] = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [5] = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
+    [6] = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
 };
-
-keyevent_t encoder1_cw = {
-    .key = (keypos_t){.row = 4, .col = 5},
-    .pressed = false
-};
-
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) { /* First encoder */
-        if (clockwise) {
-            encoder1_cw.pressed = true;
-            encoder1_cw.time = (timer_read() | 1);
-            action_exec(encoder1_cw);
-        } else {
-            encoder1_ccw.pressed = true;
-            encoder1_ccw.time = (timer_read() | 1);
-            action_exec(encoder1_ccw);
-        }
-    }
-
-    return true;
-}
+#endif
 
 void matrix_init_user(void) {
   // NICOLA親指シフト
