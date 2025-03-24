@@ -31,7 +31,7 @@
     },
     "debounce": 5,
     "tapping": {
-        "term": 200
+        "term": 120
     },
     "encoder": {
         "rotary": [
