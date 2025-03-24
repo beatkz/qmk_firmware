@@ -50,10 +50,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 cocot_config_t cocot_config;
 uint16_t cpi_array[] = COCOT_CPI_OPTIONS;
 uint16_t scrl_div_array[] = COCOT_SCROLL_DIVIDERS;
-uint16_t angle_array[] = COCOT_ROTATION_ANGLE;
+int16_t angle_array[] = COCOT_ROTATION_ANGLE;
 #define CPI_OPTION_SIZE (sizeof(cpi_array) / sizeof(uint16_t))
 #define SCRL_DIV_SIZE (sizeof(scrl_div_array) / sizeof(uint16_t))
-#define ANGLE_SIZE (sizeof(angle_array) / sizeof(uint16_t))
+#define ANGLE_SIZE (sizeof(angle_array) / sizeof(int16_t))
 
 
 // Trackball State
@@ -68,6 +68,38 @@ void pointing_device_init_kb(void) {
 }
 
 
+static double sin_degree(int16_t angle) {
+    double v[] = {
+        0,                           // 0
+        (sqrt(6) - sqrt(2)) / 4,     // 15
+        0.5,                         // 30
+        sqrt(2) / 2,                 // 45
+        sqrt(3) / 2,                 // 60
+    };
+    int i = angle < 0 ? -angle/15 : angle/15;
+    if (i > sizeof(v)/sizeof(v[0])) {
+        i = sizeof(v)/sizeof(v[0]) - 1;
+    }
+    return angle < 0 ? -v[i] : v[i];
+}
+
+
+static double cos_degree(int16_t angle) {
+    double v[] = {
+        1,                           // 0
+        (sqrt(6) + sqrt(2)) / 4,     // 15
+        sqrt(3) / 2,                 // 30
+        sqrt(2) / 2,                 // 45
+        0.5,                         // 60
+    };
+    int i = angle < 0 ? -angle/15 : angle/15;
+    if (i > sizeof(v)/sizeof(v[0])) {
+        i = sizeof(v)/sizeof(v[0]) - 1;
+    }
+    return v[i];
+}
+
+
 report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
     static float x_accumulator = 0.0;
     static float y_accumulator = 0.0;
@@ -78,9 +110,9 @@ report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
     float sensitivity_multiplier = 1.5; // Sensitivity adjustment multiplier
 
     // Apply rotation angle adjustment
-    double rad = (double)angle_array[cocot_config.rotation_angle] * (M_PI / 180) * -1;
-    float rotated_x = mouse_report.x * cos(rad) - mouse_report.y * sin(rad);
-    float rotated_y = mouse_report.x * sin(rad) + mouse_report.y * cos(rad);
+    int16_t angle = -angle_array[cocot_config.rotation_angle];
+    float rotated_x = mouse_report.x * cos_degree(angle) - mouse_report.y * sin_degree(angle);
+    float rotated_y = mouse_report.x * sin_degree(angle) + mouse_report.y * cos_degree(angle);
 
     // Apply smoothing to the rotated values
     float smoothed_x = prev_x * smoothing_factor + rotated_x * (1.0 - smoothing_factor);
@@ -152,7 +184,7 @@ report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
 
 bool process_record_kb(uint16_t keycode, keyrecord_t* record) {
     // xprintf("KL: kc: %u, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
-    
+
     if (!process_record_user(keycode, record)) {
         return false;
     }
@@ -251,58 +283,52 @@ void render_logo(void) {
 
 void oled_write_layer_state(void) {
 
-    oled_write_P(PSTR(" "), false);
     // int cpi = pointing_device_get_cpi();
     int cpi = cpi_array[cocot_config.cpi_idx];
     int scroll_div = scrl_div_array[cocot_config.scrl_div];
     int angle = angle_array[cocot_config.rotation_angle];
-    
-    char buf1[5];
-    char buf2[3];
-    char buf3[4];
-    snprintf(buf1, 5, "%4d", cpi);
-    snprintf(buf2, 3, "%2d", scroll_div);
-    snprintf(buf3, 4, "%3d", angle);
 
     switch (get_highest_layer(layer_state | default_layer_state)) {
         case 0:
-            oled_write_P(PSTR("Base "), false);
+            oled_write_P(PSTR("______"), false);
             break;
         case 1:
-            oled_write_P(PSTR("Lower"), false);
+            oled_write_P(PSTR("1_____"), false);
             break;
         case 2:
-            oled_write_P(PSTR("Raise"), false);
+            oled_write_P(PSTR("_2____"), false);
             break;
         case 3:
-            oled_write_P(PSTR("Mouse"), false);
+            oled_write_P(PSTR("__3___"), false);
             break;
         case 4:
-            oled_write_P(PSTR("L4   "), false);
+            oled_write_P(PSTR("___4__"), false);
             break;
         case 5:
-            oled_write_P(PSTR("L5   "), false);
+            oled_write_P(PSTR("____5_"), false);
             break;
         case 6:
-            oled_write_P(PSTR("L6   "), false);
+            oled_write_P(PSTR("_____6"), false);
             break;
         default:
-            oled_write_P(PSTR("Undef"), false);
+            oled_write_P(PSTR(" Undef"), false);
             break;
     }
-    oled_write_P(PSTR("/"), false);
     if (cocot_get_scroll_mode()){
-        oled_write_P(PSTR("S"), false);
+        oled_write_P(PSTR("/S/"), false);
     } else{
-        oled_write_P(PSTR("C"), false);
+        oled_write_P(PSTR("/C/"), false);
     }
-    oled_write_P(PSTR("/"), false);
-    oled_write(buf1, false);
-    oled_write_P(PSTR("/"), false);
-    oled_write(buf2, false);
-    oled_write_P(PSTR("/"), false);
-    oled_write(buf3, false);
+    oled_write(get_u8_str(cpi / 10, ' '), false);
+    oled_write_P(PSTR("0/"), false);
+    oled_write(get_u8_str(scroll_div, ' ') + 1, false);
+    if (angle < 0) {
+        oled_write_P(PSTR("/-"), false);
+        oled_write(get_u8_str(-angle, ' ') + 1, false);
+    } else {
+        oled_write_P(PSTR("/"), false);
+        oled_write(get_u8_str(angle, ' '), false);
+    }
 }
 
 #endif
-

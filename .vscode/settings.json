@@ -44,5 +44,5 @@
     "clangd.arguments": [
         "--header-insertion=never"
     ],
-    "cmake.sourceDirectory": "D:/Users/kmomose/qmk_firmware/lib/googletest"
+    "cmake.sourceDirectory": "C:/Users/keiji/kbfw/qmk/latest/lib/googletest"
 }

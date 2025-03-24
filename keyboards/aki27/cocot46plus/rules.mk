@@ -2,7 +2,6 @@ CUSTOM_MATRIX = lite
 SRC += matrix.c
 
 POINTING_DEVICE_DRIVER = adns5050
+OLED_DRIVER     = ssd1306
 
-# Disable unnecessary functions to reduce firmware size
-SPACE_CADET_ENABLE = no
-MAGIC_ENABLE = no
+ENCODER_MAP_ENABLE = yes
