@@ -146,7 +146,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 #endif
 
 
-#ifdef RGBLIGHT_ENABLE
+
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
     case _LOWER:
@@ -181,7 +181,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_effect_range( 2, 10);
       return state;
 };
-#endif
+
 
 #ifdef OLED_ENABLE
 bool oled_task_user(void) {
@@ -190,4 +190,3 @@ bool oled_task_user(void) {
     return false;
 }
 #endif
-

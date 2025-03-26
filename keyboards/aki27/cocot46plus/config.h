@@ -17,11 +17,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+/* VIA */
 #define DYNAMIC_KEYMAP_LAYER_COUNT 7
 
 /* key matrix size */
 #define MATRIX_ROWS 10
 #define MATRIX_COLS 6
+
+/* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
+#undef LOCKING_SUPPORT_ENABLE
+/* Locking resynchronize hack */
+#undef LOCKING_RESYNC_ENABLE
+
+#undef ENCODER_MAP_ENABLE
+
+/* Limit the maximum layer number to 8 */
+#define LAYER_STATE_8BIT
 
 #define ADNS5050_SCLK_PIN         B2
 #define ADNS5050_SDIO_PIN         B4
