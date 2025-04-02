@@ -205,14 +205,27 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 };
 #endif
 
+static bool fn_pressed = false;
+static uint16_t fn_pressed_time = 0;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case NCL_OFF:
+      // NICOLA親指シフト
       if (record->event.pressed) {
-        // NICOLA親指シフト
-        nicola_off();
-        // NICOLA親指シフト
+        fn_pressed = true;
+        fn_pressed_time = record->event.time;
+
+        layer_on(_FN1);
+      } else {
+        layer_off(_FN1);
+        if(fn_pressed
+        && (TIMER_DIFF_16(record->event.time, fn_pressed_time) < TAPPING_TERM)){
+            nicola_off();
+        }
+        fn_pressed = false;
       }
+
       return false;
       break;
     case NCL_ON:
