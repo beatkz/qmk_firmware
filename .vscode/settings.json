@@ -23,6 +23,13 @@
         "**/*.uf2": true
     },
     "files.associations": {
+        // QMK Filetypes
+        "keyboard.json": "jsonc",
+        "info.json": "jsonc",
+        "keymap.json": "jsonc",
+        "qmk.json": "jsonc",
+        "qmk_module.json": "jsonc",
+        // Standard filetypes
         "*.h": "c",
         "*.c": "c",
         "*.inc": "c",
@@ -41,8 +48,30 @@
     "[json]": {
         "editor.formatOnSave": false
     },
+<<<<<<< HEAD
     "clangd.arguments": [
         "--header-insertion=never"
     ],
     "cmake.sourceDirectory": "C:/Users/keiji/kbfw/qmk/latest/lib/googletest"
+=======
+    "clangd.arguments": ["--header-insertion=never"],
+    "json.schemas": [
+        {
+            "fileMatch": ["qmk.json"],
+            "url": "./data/schemas/user_repo_v1_1.jsonschema"
+        },
+        {
+            "fileMatch": ["qmk_module.json"],
+            "url": "./data/schemas/community_module.jsonschema"
+        },
+        {
+            "fileMatch": ["keyboard.json", "info.json"],
+            "url": "./data/schemas/keyboard.jsonschema"
+        },
+        {
+            "fileMatch": ["keymap.json"],
+            "url": "./data/schemas/keymap.jsonschema"
+        }
+    ]
+>>>>>>> upstream/master
 }
