@@ -1,5 +1,18 @@
 // Place your settings in this file to overwrite default and user settings.
 {
+    "terminal.integrated.profiles.windows": {
+
+        "QMK MSYS": {
+            "path":"C:/QMK_MSYS/usr/bin/bash.exe",
+            "env": {
+                "MSYSTEM": "MINGW64",
+                "CHERE_INVOKING": "1"
+            },
+            "args": ["--login"]
+        },
+    },
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.defaultProfile.windows": "QMK MSYS",
     // Unofficially, QMK uses spaces for indentation
     "editor.insertSpaces": true,
     // Configure glob patterns for excluding files and folders.
@@ -35,6 +48,12 @@
     "[json]": {
         "editor.formatOnSave": false
     },
+<<<<<<< HEAD
+    "clangd.arguments": [
+        "--header-insertion=never"
+    ],
+    "cmake.sourceDirectory": "C:/Users/keiji/kbfw/qmk/latest/lib/googletest"
+=======
     "clangd.arguments": ["--header-insertion=never"],
     "json.schemas": [
         {
@@ -54,4 +73,5 @@
             "url": "./data/schemas/keymap.jsonschema"
         }
     ]
+>>>>>>> upstream/master
 }

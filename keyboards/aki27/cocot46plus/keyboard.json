@@ -1,6 +1,7 @@
 {
     "keyboard_name": "cocot46plus",
     "manufacturer": "aki27",
+    "maintainer": "aki27",
     "usb": {
         "vid": "0x1727",
         "pid": "0x0003",
@@ -12,17 +13,23 @@
         "cols": ["F4", "F5", "F6", "F7", "B1", "B3"],
         "rows": ["D4", "C6", "D7", "E6", "NO_PIN"]
     },
+    "qmk": {
+        "locking": {
+          "enabled": false,
+          "resync": false
+        }
+    },
     "build": {
         "lto": true
     },
     "features": {
         "audio": false,
         "backlight": false,
-        "bootmagic": false,
+        "bootmagic": true,
         "command": false,
         "console": false,
         "encoder":true,
-        "extrakey": false,
+        "extrakey": true,
         "mousekey": true,
         "nkro": false,
         "oled": true,
@@ -31,7 +38,7 @@
     },
     "debounce": 5,
     "tapping": {
-        "term": 120
+        "term": 200
     },
     "encoder": {
         "rotary": [
@@ -46,7 +53,7 @@
         "animations": {
             "breathing": false,
             "rainbow_mood": true,
-            "rainbow_swirl": false,
+            "rainbow_swirl": true,
             "snake": false,
             "static_gradient": true,
             "twinkle": false
