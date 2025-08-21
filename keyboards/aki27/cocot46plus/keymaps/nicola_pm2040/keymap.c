@@ -159,6 +159,11 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
+    case _NICOLA:
+        #ifdef RGBLIGHT_ENABLE
+        rgblight_sethsv_range(HSV_PURPLE, 0, 2); // 例: NICOLA レイヤー用の色
+        #endif
+        break;
     case _LOWER:
         #ifdef RGBLIGHT_ENABLE
         rgblight_sethsv_range(HSV_BLUE, 0, 2);
@@ -199,8 +204,11 @@ bool oled_task_user(void) {
 }
 #endif
 
+// NICOLA親指シフト
+static bool nicola_active = false;
 static bool fn_pressed = false;
-static uint16_t fn_pressed_time = 0;
+static uint16_t fn_pressed_time = 0; // fn_pressed の押下時刻を保持
+// NICOLA親指シフト
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -209,15 +217,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case NCL_OFF:
       if (record->event.pressed) {
         fn_pressed = true;
-        fn_pressed_time = record->event.time;
-
+        fn_pressed_time = timer_read(); // 押下時刻を記録
         layer_on(_LOWER);
       } else {
         layer_off(_LOWER);
-
-        if(fn_pressed
-        && (TIMER_DIFF_16(record->event.time, fn_pressed_time) < TAPPING_TERM)){
-            nicola_off();
+        layer_off(_NICOLA);
+        nicola_off();
+        nicola_active = false;
+        // NCL_ON 直後（TAPPING_TERM 以内）の場合、IME をオフにする
+        if (fn_pressed && (TIMER_DIFF_16(timer_read(), fn_pressed_time) < TAPPING_TERM)) {
+            #ifdef OS_WINDOWS
+            tap_code(KC_INT5); // 無変換キーで IME をオフ
+            #elif OS_MAC
+            tap_code(KC_LNG2); // Mac の日本語入力オフ
+            #endif
+        } else {
+            #ifdef OS_WINDOWS
+            tap_code(KC_INT4); // 変換キーで IME をオン
+            #elif OS_MAC
+            tap_code(KC_LNG1); // Mac の日本語入力オン
+            #endif
         }
         fn_pressed = false;
       }
@@ -226,7 +245,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case NCL_ON:
       if (record->event.pressed) {
         nicola_on();
-        fn_pressed = false;
+        layer_on(_NICOLA);
+        nicola_active = true; // NICOLA モード状態を更新
+        fn_pressed = true; // NCL_ON でも fn_pressed を設定
+        fn_pressed_time = timer_read(); // 押下時刻を記録
+        #ifdef OS_WINDOWS
+        tap_code(KC_INT4); // 変換キーで IME をオン
+        #elif OS_MAC
+        tap_code(KC_LNG1); // Mac の日本語入力オン
+        #endif
       }
       return false;
       break;
@@ -248,6 +275,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (a == false) return false;
   // NICOLA親指シフト
     return true;
+}
+
+// タイマーによる fn_pressed のリセット
+void matrix_scan_user(void) {
+    if (fn_pressed && (TIMER_DIFF_16(timer_read(), fn_pressed_time) >= TAPPING_TERM)) {
+        fn_pressed = false; // TAPPING_TERM 経過後に fn_pressed をリセット
+    }
 }
 
 void matrix_init_user(void) {
