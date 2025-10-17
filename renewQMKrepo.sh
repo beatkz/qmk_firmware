@@ -40,7 +40,7 @@ fi
 
 if [ $UPD_MSYS = "TRUE" ] ; then
     #Update for QMK MSYS/MSYS
-    pacman -Syu
+    pacman -Syu --noconfirm
 fi
 
 if [ $UPD_DNF = "TRUE" ] ; then
@@ -50,7 +50,7 @@ fi
 
 if [ $UPD_CLI = "TRUE" ] ; then
     #Update for QMK CLI
-    pip install -U -r requirements.txt
+    python3 -m pip install -U -r requirements.txt
 fi
 
 if [ $UPD_GIT = "TRUE" ] ; then
