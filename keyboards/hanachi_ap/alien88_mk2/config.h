@@ -1,4 +1,4 @@
-// Copyright 2023 hanachi-ap 
+// Copyright 2023 hanachi-ap
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
@@ -41,7 +41,6 @@
 #define RGB_MATRIX_DEFAULT_VAL 60
 #define RGB_MATRIX_CENTER { 112, 32 }
 #define RGB_DISABLE_TIMEOUT 120000
-#define RGB_MATRIX_SLEEP true
 #define RGB_MATRIX_HUE_STEP 16
 #define RGB_MATRIX_SAT_STEP 16
 #define RGB_MATRIX_VAL_STEP 4
