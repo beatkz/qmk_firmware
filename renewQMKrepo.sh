@@ -63,5 +63,5 @@ fi
 if [ $UPD_US_VIA = "TRUE" ] ; then
     #Update for VIA's Userspace QMK Git Repo
     git fetch --all
-    git merge --no-edit upstream/main
+    git merge --no-edit --ff-only upstream/main
 fi
