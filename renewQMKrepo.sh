@@ -56,7 +56,7 @@ fi
 if [ $UPD_GIT = "TRUE" ] ; then
     #Update for QMK Repo
     git fetch --all
-    git merge --no-edit upstream/master
+    git merge --no-edit --ff-only upstream/master
     make git-submodule
 fi
 
