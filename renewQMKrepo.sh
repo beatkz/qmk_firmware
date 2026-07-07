@@ -56,12 +56,12 @@ fi
 if [ $UPD_GIT = "TRUE" ] ; then
     #Update for QMK Repo
     git fetch --all
-    git merge --no-edit --ff-only upstream/master
+    git merge --no-edit upstream/master
     make git-submodule
 fi
 
 if [ $UPD_US_VIA = "TRUE" ] ; then
     #Update for VIA's Userspace QMK Git Repo
     git fetch --all
-    git merge --no-edit --ff-only upstream/main
+    git merge --no-edit upstream/main
 fi
