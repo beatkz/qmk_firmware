@@ -339,7 +339,7 @@ __EOT__
             *gentoo*)
                 echo "It will also install the following system packages using 'emerge':" >&2
                 print_package_manager_deps_and_delay
-                $(nsudo) emerge --sync
+                $(nsudo) emaint sync
                 $(nsudo) emerge --noreplace --ask=n $(get_package_manager_deps | tr ' ' '\n') || signal_execution_failure
                 exit_if_execution_failed
                 ;;
