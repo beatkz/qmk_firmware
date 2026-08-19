@@ -8,7 +8,15 @@
         "console": false,
         "extrakey": true,
         "mousekey": true,
-        "nkro": true
+        "nkro": true,
+        "oled": true,
+        "rgblight": true
+    },
+    "rgblight": {
+        "led_count": 3
+    },
+    "ws2812": {
+        "pin": "D2"
     },
     "build": {
         "lto": true
