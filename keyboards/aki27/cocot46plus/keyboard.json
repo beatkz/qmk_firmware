@@ -36,9 +36,6 @@
         "rgblight": true
     },
     "debounce": 5,
-    "tapping": {
-        "term": 200
-    },
     "encoder": {
         "rotary": [
             { "pin_a": "D3", "pin_b": "D2", "resolution": 4 }
