@@ -1,7 +1,7 @@
 #! /bin/bash
 
 if [ "$#" -eq 0 ]; then
-    echo "usage: ./renewQMKrepo.sh -amdcg"
+    echo "usage: ./renewQMKrepo.sh -adpcg"
     echo "-a -> Update Debian based Distro(apt)[for QMK-WSL]"
     echo "-d -> Update RHEL based Distro(dnf)"
     echo "-p -> Update Arch based Distro(pacman)[for QMK-MSYS]"
